@@ -1,30 +1,35 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
+import TaskItem from "./components/TaskItem.vue";
+const count = ref(3);
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="min-h-screen bg-slate-900 p-6">
+    <div class="container mx-auto">
+      <div class="p-4 text-center text-white">
+        <h1 class="text-3xl capitalize font-semibold">Task Manager</h1>
+      </div>
+
+      <button @click="count++" class="p-4 text-white">+</button>
+
+      <div class="flex flex-col gap-4">
+        <TransitionGroup name="list">
+          <TaskItem v-for="n in count" :key="n" />
+        </TransitionGroup>
+      </div>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
