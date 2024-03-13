@@ -36,9 +36,12 @@ const { task } = defineProps<{
       </div>
     </div>
     <div class="flex justify-center items-center gap-2">
-      <button class="p-2" @click="prioritizeTask(task.id)">
-        <StarIcon class="size-4 text-yellow-200" v-if="task.isFavorite" />
-        <StarIconOutline class="size-4 text-neutral-400" v-else />
+      <button
+        class="p-2 hover:text-white text-neutral-400"
+        @click="prioritizeTask(task.id)"
+      >
+        <StarIcon class="size-4 text-yellow-400" v-if="task.isFavorite" />
+        <StarIconOutline class="size-4" v-else />
       </button>
       <button
         class="hover:bg-slate-700 p-2 rounded flex justify-center items-center text-neutral-400 hover:text-white transition-all"

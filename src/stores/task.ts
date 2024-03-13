@@ -40,12 +40,12 @@ export const useTaskStore = defineStore("task", () => {
     tasks.value.splice(index, 1);
   };
 
-  const addTask = (body: string): void => {
+  const addTask = (body: string, isFavorite: boolean = false): void => {
     const task: Task = {
       id: Date.now().toString(),
       body,
       isCompleted: false,
-      isFavorite: false,
+      isFavorite,
     };
 
     tasks.value = [task, ...tasks.value];

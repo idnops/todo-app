@@ -5,13 +5,21 @@ import TaskItem from "./TaskItem.vue";
 const { list, title } = defineProps<{
   list: Task[];
   title: string;
+  hint: string;
 }>();
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 relative mb-8">
+  <div class="flex flex-col gap-4 relative mb-32">
     <h2 class="text-2xl text-white font-medium">{{ title }}</h2>
+
     <TransitionGroup name="fade">
+      <div
+        class="p-4 bg-slate-800 border border-slate-700 border-dashed opacity-40 rounded-xl text-white text-sm w-full"
+        v-if="!list.length"
+      >
+        {{ hint }}
+      </div>
       <TaskItem v-for="task in list" :key="task.id" :task="task" />
     </TransitionGroup>
   </div>
