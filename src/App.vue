@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import TaskItem from "./components/TaskItem.vue";
-const count = ref(3);
+import { storeToRefs } from "pinia";
+import TaskList from "./components/TaskList.vue";
+import { useTaskStore } from "./stores/task";
+
+const taskStore = useTaskStore();
+const { importantTasks, regularTasks } = storeToRefs(taskStore);
 </script>
 
 <template>
@@ -11,25 +14,9 @@ const count = ref(3);
         <h1 class="text-3xl capitalize font-semibold">Task Manager</h1>
       </div>
 
-      <button @click="count++" class="p-4 text-white">+</button>
+      <TaskList :list="importantTasks" title="Important" />
 
-      <div class="flex flex-col gap-4">
-        <TransitionGroup name="list">
-          <TaskItem v-for="n in count" :key="n" />
-        </TransitionGroup>
-      </div>
+      <TaskList :list="regularTasks" title="Tasks" />
     </div>
   </div>
 </template>
-
-<style scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-</style>
