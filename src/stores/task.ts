@@ -40,6 +40,10 @@ export const useTaskStore = defineStore("task", () => {
     tasks.value.splice(index, 1);
   };
 
+  const getTask = (id: string): Task | undefined => {
+    return tasks.value.find((task) => task.id === id);
+  };
+
   const addTask = (body: string, isFavorite: boolean = false): void => {
     const task: Task = {
       id: Date.now().toString(),
@@ -51,6 +55,12 @@ export const useTaskStore = defineStore("task", () => {
     tasks.value = [task, ...tasks.value];
   };
 
+  const updateTask = (id: string, body: string, isFavorite: boolean): void => {
+    const task = tasks.value.find((task) => task.id === id);
+    task!.body = body;
+    task!.isFavorite = isFavorite;
+  };
+
   return {
     tasks,
     importantTasks,
@@ -59,5 +69,7 @@ export const useTaskStore = defineStore("task", () => {
     prioritizeTask,
     deleteTask,
     addTask,
+    getTask,
+    updateTask,
   };
 });

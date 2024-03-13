@@ -43,11 +43,13 @@ const { task } = defineProps<{
         <StarIcon class="size-4 text-yellow-400" v-if="task.isFavorite" />
         <StarIconOutline class="size-4" v-else />
       </button>
-      <button
-        class="hover:bg-slate-700 p-2 rounded flex justify-center items-center text-neutral-400 hover:text-white transition-all"
-      >
-        <PencilIcon class="size-4" />
-      </button>
+      <router-link :to="`/task/${task.id}`">
+        <button
+          class="hover:bg-slate-700 p-2 rounded flex justify-center items-center text-neutral-400 hover:text-white transition-all"
+        >
+          <PencilIcon class="size-4" />
+        </button>
+      </router-link>
       <button
         class="hover:bg-red-700 p-2 rounded flex justify-center items-center text-neutral-400 hover:text-white transition-all"
         @click="deleteTask(task.id)"
