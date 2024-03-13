@@ -30,9 +30,8 @@ const { task } = defineProps<{
         <CheckIcon v-if="task.isCompleted" class="size-4 text-black" />
       </button>
       <div>
-        <h3 class="text-xl font-medium capitalize">{{ task.title }}</h3>
         <h4 :class="[task.isCompleted ? 'line-through' : '']">
-          {{ task.content }}
+          {{ task.body }}
         </h4>
       </div>
     </div>
